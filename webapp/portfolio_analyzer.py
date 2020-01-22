@@ -46,7 +46,10 @@ def get_portfolio_summary(covar_mat, summary, weights):
     pf_var = 0
     for idx1, column1 in enumerate(covar_mat):
         for idx2, column2 in enumerate(covar_mat):
-            pf_var += weights[idx1]*weights[idx2]*covar_mat[column1][column2]
+            multiply_factor = 2
+            if column1 == column2:
+                multiply_factor = 1
+            pf_var += multiply_factor*weights[idx1]*weights[idx2]*covar_mat[column1][column2]
     pf_mean = np.dot(summary.loc['Mean'], weights)
     return (pf_mean, pf_var)
 
