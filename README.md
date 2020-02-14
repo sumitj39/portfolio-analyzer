@@ -6,7 +6,7 @@ Only REST APIs are available at this point.
 
 ## How to run?
 1. `python webapp/app.py  # start the webserver`    
-2. Make a post request to `http://localhost:8080/portfolio/` with the json body
+2. Make a `POST` request to `http://localhost:8080/portfolio/` with the json body
 ```json
 {
 	"scrips": [
@@ -21,7 +21,8 @@ Only REST APIs are available at this point.
 	]
 }
 ```
-The response gives a list of portfolio weights alongwith each risk and return.
+The response gives a list of portfolio weights with risk and return for each portfolio.    
+Note that the return and risk(standard deviation) are in percentages.
 ```json
 [
   {
