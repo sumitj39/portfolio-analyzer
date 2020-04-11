@@ -3,8 +3,8 @@ import logging
 import os
 import sys
 import time
-# from cStringIO import StringIO
 from datetime import timedelta
+
 import click
 import pandas as pd
 import requests
@@ -126,7 +126,7 @@ def parse_to_df(json_response):
     # candles['ts'] = candles.replace({"ts", r"\+0530"}, {"ts", r""}, regex=True)
     # candles['ts'] = candles.replace({"ts", r"T"}, {"ts", " "}, regex=True)
     # candles['ts'] = pd.to_datetime(candles['ts']).dt.tz_localize('Asia/Calcutta')
-    return candles[["Date","Open","High","Low","Close","Volume","Adj Close"]]
+    return candles[["Date", "Open", "High", "Low", "Close", "Volume", "Adj Close"]]
 
 
 def get_candles_from_zerodha(instrument_id, duration, start_date, end_date):
@@ -160,14 +160,15 @@ def get_candles(scrip, start_date, end_date, duration='day', exchange=DEFAULT_EX
         batch_df = get_candles_from_zerodha(
             instrument_id, duration, fd, td)
         if batch_df is not None:
-            logging.debug (batch_df.head())
-            logging.debug ("#" * 20)
+            logging.debug(batch_df.head())
+            logging.debug("#" * 20)
             if df is None:
                 df = batch_df
             else:
                 df = df.append(batch_df, ignore_index=True)
     # df.to_csv("~/qstrader/data/INFY.csv", index = False)
     return df.drop_duplicates("Date")
+
 
 @click.command()
 @click.option('--instrument', '-i', required=True, help='instrument name, eg: INFY')
