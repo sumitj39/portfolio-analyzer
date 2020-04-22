@@ -31,7 +31,6 @@ def merge_candles(candles):
     concatted_df = pd.concat([df[['Date', 'Close']].set_index(
         'Date') for df in candles.values()], axis=1, join='outer')
     concatted_df.columns = candles.keys()
-    print("concatted_df")
     print(concatted_df)
     return concatted_df
 
@@ -45,6 +44,7 @@ def get_summary_stats(universe):
         ).mean()  # expected rate of return
         summary[column]['Variance'] = universe[column].pct_change().var()
     print(universe.pct_change().cov())
+    print(summary)
     return summary
 
 
